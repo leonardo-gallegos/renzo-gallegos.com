@@ -5,19 +5,49 @@
     "description": "Mining Engineer and Data Science professional specialized in integrated operations, industrial analytics and IT/OT integration.",
     "experience": "View experience",
     "resume": "Download résumé",
-    "pending": "Experience and résumé will be available soon."
+    "pending": "Résumé will be available soon."
   },
   "Navigation": {
     "skip": "Skip to content",
     "label": "Main navigation",
     "language": "Cambiar a español",
-    "email": "Email"
+    "email": "Email",
+    "expertise": "Expertise",
+    "experience": "Experience",
+    "work": "Work",
+    "education": "Education",
+    "contact": "Contact"
   },
   "Theme": {
     "label": "Theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "Sections": {
+    "expertise": "Expertise",
+    "experience": "Professional experience",
+    "achievements": "Results in context",
+    "awards": "Awards & recognition",
+    "work": "Featured work",
+    "education": "Education",
+    "present": "Present",
+    "inProgress": "In progress"
+  },
+  "Technologies": {
+    "title": "Technologies & tools",
+    "pause": "Pause motion"
+  },
+  "Insights": {
+    "title": "Insights",
+    "forthcoming": "Forthcoming: articles on data and mining operations.",
+    "architecture": "Industrial data architectures for mining",
+    "operations": "Mine-to-Mill analytics and integrated operations",
+    "ml": "Machine learning for mining operations"
+  },
+  "Contact": {
+    "title": "Let's talk about mining, data and technology.",
+    "description": "Open to connecting around integrated operations, industrial analytics, digital transformation and IT/OT integration."
   },
   "Metadata": {
     "title": "Renzo Gallegos | Mining, Data Science & IT/OT Integration",

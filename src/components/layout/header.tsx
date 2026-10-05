@@ -2,14 +2,23 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "./container";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { siteConfig, type Locale } from "@/lib/seo";
+import type { Locale } from "@/lib/seo";
 export async function Header({locale}: {locale: Locale}) {
   const t = await getTranslations("Navigation");
-  return <header className="border-b"><Container className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4">
-    <a href={"/" + locale + "/"} translate="no" className="control-link font-semibold tracking-tight">Renzo Gallegos</a>
-    <nav aria-label={t("label")} className="flex flex-wrap items-center gap-2 sm:gap-4">
-      <a href={siteConfig.linkedin} className="control-link">LinkedIn</a>
-      <LanguageSwitcher locale={locale} /><ThemeToggle />
-    </nav>
-  </Container></header>;
+  return (
+    <header className="border-b">
+      <Container className="header-layout">
+        <a href={`/${locale}/`} translate="no" className="control-link font-semibold tracking-tight">Renzo Gallegos</a>
+        <nav aria-label={t("label")} className="home-navigation">
+          {["expertise", "experience", "work", "education", "contact"].map(id => (
+            <a key={id} href={`/${locale}/#${id}`} className="control-link">{t(id)}</a>
+          ))}
+        </nav>
+        <div className="flex items-center justify-end gap-4">
+          <LanguageSwitcher locale={locale} />
+          <ThemeToggle />
+        </div>
+      </Container>
+    </header>
+  );
 }

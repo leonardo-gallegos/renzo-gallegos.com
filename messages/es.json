@@ -5,19 +5,49 @@
     "description": "Ingeniero de Minas y profesional de Ciencia de Datos especializado en operaciones integradas, analítica industrial e integración IT/OT.",
     "experience": "Ver experiencia",
     "resume": "Descargar CV",
-    "pending": "La experiencia y el CV estarán disponibles próximamente."
+    "pending": "El CV estará disponible próximamente."
   },
   "Navigation": {
     "skip": "Saltar al contenido",
     "label": "Navegación principal",
     "language": "Switch to English",
-    "email": "Correo"
+    "email": "Correo",
+    "expertise": "Especialidades",
+    "experience": "Experiencia",
+    "work": "Proyectos",
+    "education": "Educación",
+    "contact": "Contacto"
   },
   "Theme": {
     "label": "Tema",
     "light": "Claro",
     "dark": "Oscuro",
     "system": "Sistema"
+  },
+  "Sections": {
+    "expertise": "Especialidades",
+    "experience": "Experiencia profesional",
+    "achievements": "Resultados en contexto",
+    "awards": "Premios y reconocimientos",
+    "work": "Trabajo destacado",
+    "education": "Educación",
+    "present": "Actualidad",
+    "inProgress": "En curso"
+  },
+  "Technologies": {
+    "title": "Tecnologías y herramientas",
+    "pause": "Pausar movimiento"
+  },
+  "Insights": {
+    "title": "Ideas y análisis",
+    "forthcoming": "Próximamente: artículos sobre datos y operaciones mineras.",
+    "architecture": "Arquitecturas de datos industriales para minería",
+    "operations": "Analítica Mine-to-Mill y operaciones integradas",
+    "ml": "Machine Learning aplicado a operaciones mineras"
+  },
+  "Contact": {
+    "title": "Conversemos sobre minería, datos y tecnología.",
+    "description": "Disponible para conectar sobre operaciones integradas, analítica industrial, transformación digital e integración IT/OT."
   },
   "Metadata": {
     "title": "Renzo Gallegos | Minería, Ciencia de Datos e Integración IT/OT",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
+import { professionalSummary } from "@/data/expertise";
 export type Locale = (typeof routing.locales)[number];
 export const siteConfig = {
   name: "Renzo Gallegos", url: "https://renzogallegos.com",
@@ -25,8 +26,9 @@ export function homeMetadata(locale: Locale, title: string, description: string)
 export function personJsonLd(locale: Locale) {
   return {"@context": "https://schema.org", "@type": "Person", name: siteConfig.name,
     url: siteConfig.url, sameAs: [siteConfig.linkedin],
-    description: locale === "es"
-      ? "Ingeniero de Minas y profesional de Ciencia de Datos especializado en operaciones integradas, analítica industrial e integración IT/OT."
-      : "Mining Engineer and Data Science professional specialized in integrated operations, industrial analytics and IT/OT integration.",
-    knowsAbout: ["Mining Engineering", "Data Science", "Industrial Analytics", "IT/OT Integration"]};
+    description: professionalSummary[locale],
+    jobTitle: locale === "es"
+      ? "Supervisor de Centro Integrado de Operaciones (CIO)"
+      : "Integrated Operations Center (IOC) Supervisor",
+    knowsAbout: ["Mining Engineering", "Data Science", "Industrial Analytics", "IT/OT Integration", "AVEVA PI System", "Mine-to-Mill", "Integrated Operations", "Digital Transformation"]};
 }
