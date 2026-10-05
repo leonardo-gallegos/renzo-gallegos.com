@@ -1,0 +1,77 @@
+---
+title: "Arquitectura de datos para analítica Mine-to-Mill"
+description: "Cómo integrar FMS, historiador y datos relacionales conservando contexto, calidad y trazabilidad antes de construir analítica de mina y planta."
+slug: arquitectura-datos-mine-to-mill
+locale: es
+publishedAt: "2026-10-05"
+category: mining-analytics
+tags: ["Mine-to-Mill", "FMS", "AVEVA PI System", "PostgreSQL", "Python", "IT/OT"]
+featured: false
+draft: false
+translationKey: mine-to-mill-data-architecture
+---
+
+Cruzar una serie del historiador con un reporte de despacho no establece por sí solo una relación entre mina y planta. Antes del análisis, hay que definir qué material, intervalo y estado operacional representa cada registro.
+
+Esta nota propone una arquitectura conceptual. Los campos y ejemplos son sintéticos; no describen sistemas internos ni resultados de una operación.
+
+## Conservar el significado de cada fuente
+
+Separe la extracción, la preparación y el consumo analítico. Conserve una copia trazable de lo recibido, junto con su origen y momento de extracción. Aplique después reglas explícitas para producir conjuntos de datos que puedan compararse.
+
+| Fuente | Contexto que conviene conservar | Pregunta antes de integrar |
+| --- | --- | --- |
+| FMS / despacho | Equipo, evento, origen y destino | ¿Qué representa cada evento? |
+| Historiador | Variable, unidad, instante y calidad | ¿Es una lectura, un estado o un agregado? |
+| Datos relacionales | Identificador, vigencia y relación | ¿Qué versión del contexto aplica? |
+
+Un nombre parecido no garantiza equivalencia. Mantenga un catálogo de correspondencias entre identificadores y defina cómo se gestionan los cambios. La [estructura de activos en PI AF](/es/blog/estructurar-pi-af-operacion-minera/) puede ayudar a organizar el contexto industrial, pero no sustituye esa revisión.
+
+## Alinear tiempo sin perder el proceso
+
+Normalice la representación del tiempo y conserve la zona horaria de origen. Distinga el instante del evento del momento en que llegó a la plataforma. Defina límites de intervalo, tratamiento de eventos tardíos y reglas de agregación antes de unir fuentes.
+
+### No confundir simultaneidad con correspondencia
+
+Un registro de mina y una lectura de planta con la misma hora pueden representar materiales diferentes. Transporte, almacenamiento y mezcla afectan esa correspondencia. Una ventana temporal es una hipótesis de trabajo, no evidencia suficiente de trazabilidad del material.
+
+Si no puede reconstruir el recorrido, documente la limitación. Evite presentar una correlación temporal como una relación causal. Para cada análisis, describa la unidad de observación: evento, equipo, intervalo o lote, según lo que realmente permitan los datos.
+
+## Hacer visible la calidad
+
+No convierta valores ausentes en cero de forma general. Distinga ausencia, mala calidad, dato fuera de rango y dato que no aplica. Conserve esas señales hasta el consumo para que un agregado no esconda sus limitaciones.
+
+Un contrato ilustrativo para un conjunto preparado podría incluir:
+
+```json
+{
+  "asset_id": "example-asset",
+  "event_time_utc": "<instant-in-UTC>",
+  "source_system": "<documented-source>",
+  "quality_status": "missing",
+  "value": null,
+  "transformation_version": "example-v1"
+}
+```
+
+Los nombres no son un esquema obligatorio. Lo importante es poder distinguir identidad, tiempo, procedencia, calidad y versión de transformación. Defina también la unidad del valor y dónde se consulta su significado.
+
+## Elegir dónde ejecutar por restricciones reales
+
+Evalúe cómputo local y cloud con criterios explícitos: conectividad, latencia aceptable, acceso autorizado, sensibilidad de los datos, volumen transferido y capacidad de mantenimiento. Mantenga las credenciales fuera del código y asigne permisos según el acceso necesario.
+
+Evite mover toda la historia antes de definir el caso de uso. Un conjunto acotado y reproducible permite evaluar el proceso de integración. Si exporta datos, registre qué salió, cuándo, con qué transformación y bajo qué autorización.
+
+## Entregar un conjunto reproducible antes del modelo
+
+Antes de entrenar o publicar una visualización:
+
+1. Defina la pregunta operacional y la unidad de observación.
+2. Verifique identidades y vigencias de contexto.
+3. Revise unidades, intervalos y cobertura de calidad.
+4. Documente exclusiones y supuestos de correspondencia mina–planta.
+5. Conserve la versión de las reglas y los datos de entrada permitidos.
+
+---
+
+El entregable inicial debería permitir reconstruir un resultado y explicar sus límites. La decisión sobre el modelo analítico viene después de poder defender cómo se formó cada observación. Esa secuencia evita que una integración aparentemente completa oculte preguntas todavía abiertas sobre el proceso.

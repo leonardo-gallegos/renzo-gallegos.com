@@ -1,0 +1,84 @@
+---
+title: "How to Structure PI Asset Framework for a Mining Operation"
+description: "Design criteria for assets, templates and metadata in PI AF, keeping physical identity distinct from operational context and analytical calculations."
+slug: structure-pi-af-mining-operation
+locale: en
+publishedAt: "2026-10-05"
+category: industrial-data
+tags: ["AVEVA PI System", "PI AF", "IT/OT"]
+featured: false
+draft: false
+translationKey: pi-af-mining-structure
+---
+
+An asset model should answer three questions: which equipment a signal represents, what its value means, and who maintains that definition. A hierarchy that simply mirrors tag folders may make an initial search easier while leaving those questions unanswered.
+
+This note proposes design criteria for mining. Its examples are illustrative; they do not represent an employer’s installation, configuration or results.
+
+## Start with operational scope
+
+First define the areas that need a stable identity: mine, crushing, concentrator, tailings, water and energy. Then place systems and equipment within that scope. Avoid copying the organization chart: a change in ownership should not require moving every asset.
+
+A conceptual structure could start here:
+
+```text
+Operation
+  Mine
+  Crushing
+  Concentrator
+  Tailings
+  Water
+  Energy
+```
+
+This is not a recipe for six branches in every operation. Water or energy may cross several areas. Decide where each asset belongs and how its relationships will be documented before duplicating it for each consumer.
+
+## Separate identity, context and calculation
+
+Equipment identity should survive a change in display name or location. Context describes where it operates and what it does. A calculation describes an interpretation of its data. Keep those responsibilities distinguishable.
+
+| Responsibility | Illustrative example | Maintenance criterion |
+| --- | --- | --- |
+| Identity | Asset identifier | Stable and traceable to its catalog |
+| Context | Area, function, unit of measure | Explicit definition and owner |
+| Analytics | Calculated indicator | Documented formula, inputs and version |
+
+If an indicator uses data from several assets, do not turn it into fictional equipment just to fit the tree. Document its operational scope and dependencies. A physical asset, an operational grouping and an analytical product may need different representations.
+
+## Design templates around shared behavior
+
+PI AF supports templates for common attributes of related assets; [AVEVA describes this contextualization approach](https://www.aveva.com/en/perspectives/blog/easy-as-pi-asset-framework/). The design decision is what deserves to be common.
+
+Start with a bounded family. For a pump, for example, consider identity, service, available variables and units. Do not add a variable to every instance just because one piece of equipment has it. Distinguish the minimum contract from extensions that are actually needed.
+
+### Define the contract before multiplying instances
+
+For each attribute, record:
+
+- operational meaning and unit;
+- signal origin and owner;
+- handling of missing or poor-quality data;
+- intended consumer;
+- acceptance criteria for a new instance.
+
+Test the template against equipment with known differences. If almost every instance needs exceptions, revisit the family you selected. An overly broad template can hide meaningful differences; one template per asset loses much of the benefit of standardization.
+
+## Name assets for maintenance
+
+Use display names that help operators and a stable identifier for integrations. Do not use a screen name as asset identity. Document abbreviations, separators and uniqueness rules.
+
+Avoid encoding every attribute in the name. A change in area, function or owner can make that convention lead to renaming that is hard to trace. Keep those details as metadata where appropriate and preserve the link to the source catalog.
+
+## Scale through a small, repeatable review
+
+Before extending the model to another area:
+
+1. Check that assets have unique identities and justified locations.
+2. Review definitions and units in a sample of attributes.
+3. Verify that missing data is not interpreted as zero.
+4. Identify integrations and displays that depend on the template.
+5. Assign an owner to approve and document changes.
+
+> An orderly tree helps navigation. A maintainable model also explains what changes, who approves it, and which consumers may be affected.
+
+A useful first deliverable is one asset family with its data contract, rather than an entire hierarchy full of exceptions. That scope allows decisions to be corrected before they spread. To connect these assets with mine and plant data, read the note on [Mine-to-Mill architecture](/en/blog/mine-to-mill-data-architecture/).

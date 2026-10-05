@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 import { geist } from "@/lib/fonts";
+import { Analytics } from "@/components/analytics";
 import "../globals.css";
 export const dynamicParams = false;
 export function generateStaticParams() {return routing.locales.map(locale => ({locale}));}
@@ -20,6 +21,6 @@ export default async function LocaleLayout({children, params}: {
     <body><NextIntlClientProvider locale={locale} messages={messages}><ThemeProvider>
       <a href="#main-content" className="skip-link">{messages.Navigation.skip}</a>
       <Header locale={locale} />{children}<Footer />
-    </ThemeProvider></NextIntlClientProvider></body>
+    </ThemeProvider></NextIntlClientProvider><Analytics /></body>
   </html>;
 }

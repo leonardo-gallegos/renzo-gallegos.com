@@ -6,6 +6,7 @@ export const siteConfig = {
   name: "Renzo Gallegos", url: "https://renzogallegos.com",
   linkedin: "https://linkedin.com/in/renzo-gallegos", email: "renzo.leonardo@hotmail.com",
 };
+export const socialImage = { url: "/images/renzo-gallegos-social.png", width: 1200, height: 630, alt: "Renzo Gallegos — Mining, Data Science & IT/OT Integration" };
 export function localizedUrl(locale: Locale, path = "") {
   return siteConfig.url + "/" + locale + "/" + (path ? path.replace(/^\/+|\/+$/g, "") + "/" : "");
 }
@@ -18,13 +19,13 @@ export function homeMetadata(locale: Locale, title: string, description: string)
     alternates: {canonical: localizedUrl(locale), languages: languageAlternates()},
     openGraph: {type: "website", url: localizedUrl(locale), title, description,
       siteName: siteConfig.name, locale: locale === "es" ? "es_PE" : "en_US",
-      alternateLocale: [locale === "es" ? "en_US" : "es_PE"]},
-    twitter: {card: "summary", title, description},
+      alternateLocale: [locale === "es" ? "en_US" : "es_PE"], images: [socialImage]},
+    twitter: {card: "summary_large_image", title, description, images: [socialImage.url]},
     robots: {index: true, follow: true}, manifest: "/manifest.webmanifest",
   };
 }
 export function personJsonLd(locale: Locale) {
-  return {"@context": "https://schema.org", "@type": "Person", name: siteConfig.name,
+  return {"@context": "https://schema.org", "@type": "Person", "@id": `${siteConfig.url}/#person`, name: siteConfig.name,
     url: siteConfig.url, sameAs: [siteConfig.linkedin],
     description: professionalSummary[locale],
     jobTitle: locale === "es"

@@ -1,0 +1,77 @@
+---
+title: "Data Architecture for Mine-to-Mill Analytics"
+description: "Integrate FMS, historian and relational data while preserving context, quality and traceability before building mine and plant analytics."
+slug: mine-to-mill-data-architecture
+locale: en
+publishedAt: "2026-10-05"
+category: mining-analytics
+tags: ["Mine-to-Mill", "FMS", "AVEVA PI System", "PostgreSQL", "Python", "IT/OT"]
+featured: false
+draft: false
+translationKey: mine-to-mill-data-architecture
+---
+
+Joining a historian series with a dispatch report does not, by itself, establish a relationship between mine and plant. Before analysis, define which material, interval and operating state each record represents.
+
+This note proposes a conceptual architecture. Its fields and examples are synthetic; they do not describe internal systems or an operation’s results.
+
+## Preserve the meaning of each source
+
+Separate extraction, preparation and analytical consumption. Retain a traceable copy of what was received, including its origin and extraction time. Then apply explicit rules to produce datasets that can be compared.
+
+| Source | Context worth preserving | Question before integration |
+| --- | --- | --- |
+| FMS / dispatch | Equipment, event, origin and destination | What does each event represent? |
+| Historian | Variable, unit, timestamp and quality | Is it a reading, a state or an aggregate? |
+| Relational data | Identifier, validity and relationship | Which context version applies? |
+
+Similar names do not guarantee equivalence. Maintain a catalog of identifier mappings and define how changes are handled. An [asset structure in PI AF](/en/blog/structure-pi-af-mining-operation/) can help organize industrial context, but it does not replace that review.
+
+## Align time without losing the process
+
+Normalize the representation of time and preserve the source time zone. Distinguish event time from platform arrival time. Define interval boundaries, late-event handling and aggregation rules before joining sources.
+
+### Do not confuse simultaneity with correspondence
+
+A mine record and a plant reading at the same time may represent different material. Transport, storage and blending affect that correspondence. A time window is a working hypothesis, rather than sufficient evidence of material traceability.
+
+If you cannot reconstruct the route, document the limitation. Avoid presenting a temporal correlation as a causal relationship. For each analysis, describe the unit of observation: event, equipment, interval or batch, according to what the data actually supports.
+
+## Make quality visible
+
+Do not generally convert missing values to zero. Distinguish missing, poor-quality, out-of-range and not-applicable data. Preserve these signals through consumption so an aggregate does not hide its limitations.
+
+An illustrative contract for a prepared dataset could include:
+
+```json
+{
+  "asset_id": "example-asset",
+  "event_time_utc": "<instant-in-UTC>",
+  "source_system": "<documented-source>",
+  "quality_status": "missing",
+  "value": null,
+  "transformation_version": "example-v1"
+}
+```
+
+These names are not a mandatory schema. The important point is to distinguish identity, time, provenance, quality and transformation version. Also define the value’s unit and where its meaning can be found.
+
+## Choose execution location from real constraints
+
+Evaluate local and cloud compute against explicit criteria: connectivity, acceptable latency, authorized access, data sensitivity, transferred volume and maintenance capacity. Keep credentials out of code and grant permissions according to the access needed.
+
+Avoid moving the entire history before defining the use case. A bounded, reproducible dataset lets you evaluate the integration process. If you export data, record what left, when, under which transformation and with what authorization.
+
+## Deliver a reproducible dataset before the model
+
+Before training a model or publishing a visualization:
+
+1. Define the operational question and unit of observation.
+2. Verify identities and context validity periods.
+3. Review units, intervals and quality coverage.
+4. Document exclusions and assumptions about mine–plant correspondence.
+5. Preserve the version of the rules and permitted input data.
+
+---
+
+The initial deliverable should let someone reconstruct a result and explain its limitations. Decide on the analytical model after you can defend how each observation was formed. That sequence prevents an apparently complete integration from concealing unresolved questions about the process.

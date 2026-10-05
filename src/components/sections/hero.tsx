@@ -17,7 +17,7 @@ export async function Hero({ locale }: { locale: Locale }) {
           {t("experience")}<ArrowDown aria-hidden="true" className="size-4" />
         </a>
         {cv ? (
-          <a href={cv} download className="hero-cta border hover:bg-muted">
+          <a href={cv} download={`renzo-gallegos-cv-${locale}.pdf`} type="application/pdf" hrefLang={locale} className="hero-cta border hover:bg-muted">
             {t("resume")}<Download aria-hidden="true" className="size-4" />
           </a>
         ) : (

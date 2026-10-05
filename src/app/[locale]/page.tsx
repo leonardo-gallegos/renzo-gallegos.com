@@ -36,7 +36,7 @@ export default async function HomePage({params}: Props) {
       <Awards locale={locale} />
       <FeaturedWork locale={locale} />
       <Education locale={locale} />
-      <Insights />
+      <Insights locale={locale} />
       <Contact />
     </main>
   );

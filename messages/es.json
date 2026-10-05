@@ -16,7 +16,8 @@
     "experience": "Experiencia",
     "work": "Proyectos",
     "education": "Educación",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "blog": "Blog"
   },
   "Theme": {
     "label": "Tema",
@@ -40,10 +41,8 @@
   },
   "Insights": {
     "title": "Ideas y análisis",
-    "forthcoming": "Próximamente: artículos sobre datos y operaciones mineras.",
-    "architecture": "Arquitecturas de datos industriales para minería",
-    "operations": "Analítica Mine-to-Mill y operaciones integradas",
-    "ml": "Machine Learning aplicado a operaciones mineras"
+    "description": "Notas técnicas sobre arquitectura de datos y operaciones mineras.",
+    "all": "Ver todos los artículos"
   },
   "Contact": {
     "title": "Conversemos sobre minería, datos y tecnología.",
@@ -52,5 +51,23 @@
   "Metadata": {
     "title": "Renzo Gallegos | Minería, Ciencia de Datos e Integración IT/OT",
     "description": "Ingeniero de Minas especializado en ciencia de datos, analítica industrial, AVEVA PI System, integración IT/OT y transformación digital para operaciones mineras."
+  },
+  "Blog": {
+    "title": "Blog técnico",
+    "metaTitle": "Blog de datos industriales y minería | Renzo Gallegos",
+    "description": "Criterios de diseño para datos industriales, integración IT/OT y analítica Mine-to-Mill. Notas técnicas de Renzo Gallegos.",
+    "readingTime": "{minutes} min de lectura",
+    "feed": "Suscribirse por RSS",
+    "empty": "Todavía no hay artículos publicados.",
+    "home": "Inicio",
+    "breadcrumbs": "Ruta de navegación",
+    "toc": "En este artículo",
+    "related": "Lecturas relacionadas",
+    "comments": "Comentarios",
+    "updated": "Actualizado:",
+    "tags": "Etiquetas",
+    "back": "Volver al Blog",
+    "table": "Tabla del artículo",
+    "featured": "Artículo destacado"
   }
 }

@@ -1,0 +1,84 @@
+---
+title: "Cómo estructurar PI Asset Framework para una operación minera"
+description: "Criterios para organizar activos, plantillas y metadatos en PI AF sin confundir la jerarquía física con los cálculos analíticos."
+slug: estructurar-pi-af-operacion-minera
+locale: es
+publishedAt: "2026-10-05"
+category: industrial-data
+tags: ["AVEVA PI System", "PI AF", "IT/OT"]
+featured: false
+draft: false
+translationKey: pi-af-mining-structure
+---
+
+Un modelo de activos debe permitir responder tres preguntas: qué equipo representa una señal, qué significa su valor y quién mantiene esa definición. Una jerarquía que solo reproduce carpetas de tags puede facilitar la búsqueda inicial, pero deja esas preguntas sin resolver.
+
+Esta nota propone criterios de diseño para minería. Los ejemplos son ilustrativos; no representan una instalación, configuración ni resultado de un empleador.
+
+## Empezar por el alcance operacional
+
+Defina primero las áreas que necesitan una identidad estable: mina, chancado, concentradora, relaves, agua y energía. Después ubique sistemas y equipos dentro de ese alcance. Evite copiar el organigrama: un cambio de responsable no debería obligar a mover todos los activos.
+
+Una estructura conceptual puede comenzar así:
+
+```text
+Operación
+  Mina
+  Chancado
+  Concentradora
+  Relaves
+  Agua
+  Energía
+```
+
+No es una receta para crear seis ramas en cualquier operación. Agua o energía pueden atravesar varias áreas. Decida dónde vive cada activo y cómo se documentan sus relaciones antes de duplicarlo para cada consumidor.
+
+## Separar identidad, contexto y cálculo
+
+La identidad del equipo debe sobrevivir a un cambio de nombre visible o ubicación. El contexto describe dónde opera y qué función cumple. El cálculo describe una interpretación de sus datos. Mantenga esas responsabilidades distinguibles.
+
+| Responsabilidad | Ejemplo ilustrativo | Criterio de mantenimiento |
+| --- | --- | --- |
+| Identidad | Identificador del activo | Estable y trazable a su catálogo |
+| Contexto | Área, función, unidad de medida | Definición y responsable explícitos |
+| Analítica | Indicador calculado | Fórmula, entradas y versión documentadas |
+
+Si un indicador utiliza datos de varios activos, no convierta ese indicador en un equipo ficticio para hacerlo encajar en el árbol. Documente su alcance operacional y sus dependencias. Un activo físico, una agrupación operacional y un producto analítico pueden necesitar representaciones diferentes.
+
+## Diseñar plantillas por comportamiento compartido
+
+PI AF permite usar plantillas para representar atributos comunes de activos relacionados; [AVEVA describe este enfoque de contextualización](https://www.aveva.com/en/perspectives/blog/easy-as-pi-asset-framework/). La decisión de diseño es qué merece ser común.
+
+Empiece por una familia acotada. Para una bomba, por ejemplo, evalúe identidad, servicio, variables disponibles y unidades. No añada una variable a todas las instancias solo porque aparece en un equipo. Distinga el contrato mínimo de las extensiones realmente necesarias.
+
+### Definir el contrato antes de multiplicar instancias
+
+Para cada atributo, registre:
+
+- significado operacional y unidad;
+- origen y responsable de la señal;
+- tratamiento de ausencia o mala calidad;
+- consumidor previsto;
+- criterio para aceptar una nueva instancia.
+
+Pruebe la plantilla con equipos que tengan diferencias conocidas. Si exige excepciones en casi todos, revise la familia elegida. Una plantilla muy amplia puede ocultar diferencias relevantes; una por equipo elimina gran parte del valor de estandarizar.
+
+## Nombrar para mantener el modelo
+
+Use nombres visibles que ayuden al operador y un identificador estable para las integraciones. No use el nombre de una pantalla como identidad de activo. Documente abreviaturas, separadores y criterios de unicidad.
+
+Evite codificar todos los atributos en el nombre. Si cambia el área, la función o el responsable, esa convención puede generar renombrados difíciles de seguir. Mantenga esos datos como metadatos cuando corresponda y conserve el vínculo con el catálogo de origen.
+
+## Escalar con una revisión pequeña y repetible
+
+Antes de extender el modelo a otra área:
+
+1. Revise si los activos tienen identidad única y una ubicación justificada.
+2. Compruebe definiciones y unidades en una muestra de atributos.
+3. Verifique que una ausencia de datos no se interprete como cero.
+4. Identifique qué integraciones y visualizaciones dependen de la plantilla.
+5. Asigne un responsable para aprobar y documentar cambios.
+
+> Un árbol ordenado ayuda a navegar. Un modelo mantenible también permite entender qué cambia, quién lo aprueba y qué consumidores podrían verse afectados.
+
+Un buen primer entregable es una familia de activos con su contrato de datos, no una jerarquía completa llena de excepciones. Ese alcance permite corregir decisiones antes de propagarlas. Para conectar después estos activos con datos de mina y planta, consulte la nota sobre [arquitectura Mine-to-Mill](/es/blog/arquitectura-datos-mine-to-mill/).

@@ -16,7 +16,8 @@
     "experience": "Experience",
     "work": "Work",
     "education": "Education",
-    "contact": "Contact"
+    "contact": "Contact",
+    "blog": "Blog"
   },
   "Theme": {
     "label": "Theme",
@@ -40,10 +41,8 @@
   },
   "Insights": {
     "title": "Insights",
-    "forthcoming": "Forthcoming: articles on data and mining operations.",
-    "architecture": "Industrial data architectures for mining",
-    "operations": "Mine-to-Mill analytics and integrated operations",
-    "ml": "Machine learning for mining operations"
+    "description": "Technical notes on data architecture and mining operations.",
+    "all": "View all articles"
   },
   "Contact": {
     "title": "Let's talk about mining, data and technology.",
@@ -52,5 +51,23 @@
   "Metadata": {
     "title": "Renzo Gallegos | Mining, Data Science & IT/OT Integration",
     "description": "Mining Engineer specialized in data science, industrial analytics, AVEVA PI System, IT/OT integration and digital transformation for mining operations."
+  },
+  "Blog": {
+    "title": "Technical blog",
+    "metaTitle": "Industrial data and mining blog | Renzo Gallegos",
+    "description": "Design criteria for industrial data, IT/OT integration and Mine-to-Mill analytics. Technical notes by Renzo Gallegos.",
+    "readingTime": "{minutes} min read",
+    "feed": "Subscribe via RSS",
+    "empty": "No articles have been published yet.",
+    "home": "Home",
+    "breadcrumbs": "Breadcrumbs",
+    "toc": "In this article",
+    "related": "Related reading",
+    "comments": "Comments",
+    "updated": "Updated:",
+    "tags": "Tags",
+    "back": "Back to Blog",
+    "table": "Article table",
+    "featured": "Featured article"
   }
 }

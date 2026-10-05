@@ -1,10 +1,10 @@
 import { text, type Experience } from "./types";
 
-// Source: CODEX_TASK_02_HOME_PRELIMINARY_RELEASE.md, section 10.
+// Source: Task 02, section 10; location/role titles reconciled with owner CVs in Task 05.
 export const experience: Experience[] = [
   {
     id: "southern", employer: "Southern Peru Copper Corporation",
-    location: text("Ilabaya, Tacna, Perú", "Ilabaya, Tacna, Peru"), start: "2026-05",
+    location: text("Toquepala, Tacna, Perú", "Toquepala, Tacna, Peru"), start: "2026-05",
     roles: [{ title: text("Supervisor de Centro Integrado de Operaciones (CIO)", "Integrated Operations Center (IOC) Supervisor"), start: "2026-05" }],
     highlights: [
       text("Gobernanza de datos y KPIs a lo largo de mina, concentradora, relaves, agua, energía y costos.", "Data and KPI governance across mine, concentrator, tailings, water, energy and costs."),
@@ -25,8 +25,8 @@ export const experience: Experience[] = [
   {
     id: "las-bambas", employer: "Minera Las Bambas (MMG)", location: text("Apurímac, Perú", "Apurímac, Peru"), start: "2022-04", end: "2026-01",
     roles: [
-      { title: text("Supervisor de Transformación Digital Minera / Project Manager", "Mining Digital Transformation Supervisor / Project Manager"), start: "2025-10", end: "2026-01" },
-      { title: text("Analista de Transformación Digital Minera / Project Manager", "Mining Digital Transformation Analyst / Project Manager"), start: "2023-04", end: "2025-10" },
+      { title: text("Supervisor de Transformación Digital Minera", "Digital Mining Transformation Supervisor"), start: "2025-10", end: "2026-01" },
+      { title: text("Analista de Transformación Digital Minera", "Digital Mining Transformation Analyst"), start: "2023-04", end: "2025-10" },
       { title: text("Analista Jr de Transformación Digital Minera", "Junior Mining Digital Transformation Analyst"), start: "2022-04", end: "2023-04" },
     ],
     highlights: [
