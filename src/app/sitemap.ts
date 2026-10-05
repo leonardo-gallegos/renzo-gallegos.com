@@ -1,31 +1,10 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/seo";
-
+import { routing } from "@/i18n/routing";
+import { localizedUrl, languageAlternates } from "@/lib/seo";
+export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: `${siteConfig.url}/es/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-      alternates: {
-        languages: {
-          es: `${siteConfig.url}/es/`,
-          en: `${siteConfig.url}/en/`,
-        },
-      },
-    },
-    {
-      url: `${siteConfig.url}/en/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-      alternates: {
-        languages: {
-          es: `${siteConfig.url}/es/`,
-          en: `${siteConfig.url}/en/`,
-        },
-      },
-    },
-  ];
+  const publicPaths = [""];
+  return publicPaths.flatMap(path => routing.locales.map(locale => ({
+    url: localizedUrl(locale, path), alternates: {languages: languageAlternates(path)},
+  })));
 }

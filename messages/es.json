@@ -4,6 +4,23 @@
     "title": "Ingeniería minera impulsada por datos.",
     "description": "Ingeniero de Minas y profesional de Ciencia de Datos especializado en operaciones integradas, analítica industrial e integración IT/OT.",
     "experience": "Ver experiencia",
-    "resume": "Descargar CV"
+    "resume": "Descargar CV",
+    "pending": "La experiencia y el CV estarán disponibles próximamente."
+  },
+  "Navigation": {
+    "skip": "Saltar al contenido",
+    "label": "Navegación principal",
+    "language": "Switch to English",
+    "email": "Correo"
+  },
+  "Theme": {
+    "label": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "Metadata": {
+    "title": "Renzo Gallegos | Minería, Ciencia de Datos e Integración IT/OT",
+    "description": "Ingeniero de Minas especializado en ciencia de datos, analítica industrial, AVEVA PI System, integración IT/OT y transformación digital para operaciones mineras."
   }
 }

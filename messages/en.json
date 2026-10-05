@@ -4,6 +4,23 @@
     "title": "Building data-driven mining operations.",
     "description": "Mining Engineer and Data Science professional specialized in integrated operations, industrial analytics and IT/OT integration.",
     "experience": "View experience",
-    "resume": "Download résumé"
+    "resume": "Download résumé",
+    "pending": "Experience and résumé will be available soon."
+  },
+  "Navigation": {
+    "skip": "Skip to content",
+    "label": "Main navigation",
+    "language": "Cambiar a español",
+    "email": "Email"
+  },
+  "Theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "Metadata": {
+    "title": "Renzo Gallegos | Mining, Data Science & IT/OT Integration",
+    "description": "Mining Engineer specialized in data science, industrial analytics, AVEVA PI System, IT/OT integration and digital transformation for mining operations."
   }
 }

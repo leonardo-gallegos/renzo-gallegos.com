@@ -1,27 +1,15 @@
-import Link from "next/link";
-
-export function Header({ locale }: { locale: "es" | "en" }) {
-  const otherLocale = locale === "es" ? "en" : "es";
-
-  return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:px-8">
-        <Link href={`/${locale}/`} className="font-semibold tracking-tight">
-          Renzo Gallegos
-        </Link>
-
-        <nav className="flex items-center gap-5 text-sm text-muted-foreground">
-          <Link href={`/${locale}/#experience`} className="hover:text-foreground">
-            {locale === "es" ? "Experiencia" : "Experience"}
-          </Link>
-          <Link href={`/${locale}/blog/`} className="hover:text-foreground">
-            Blog
-          </Link>
-          <Link href={`/${otherLocale}/`} className="hover:text-foreground">
-            {otherLocale.toUpperCase()}
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
+import { getTranslations } from "next-intl/server";
+import { Container } from "./container";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { siteConfig, type Locale } from "@/lib/seo";
+export async function Header({locale}: {locale: Locale}) {
+  const t = await getTranslations("Navigation");
+  return <header className="border-b"><Container className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4">
+    <a href={"/" + locale + "/"} translate="no" className="control-link font-semibold tracking-tight">Renzo Gallegos</a>
+    <nav aria-label={t("label")} className="flex flex-wrap items-center gap-2 sm:gap-4">
+      <a href={siteConfig.linkedin} className="control-link">LinkedIn</a>
+      <LanguageSwitcher locale={locale} /><ThemeToggle />
+    </nav>
+  </Container></header>;
 }
